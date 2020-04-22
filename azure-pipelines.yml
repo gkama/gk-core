@@ -33,10 +33,3 @@ stages:
         command: test
         projects: '**/*.Tests.csproj'
         publishTestResults: false
-
-    - task: DotNetCoreCLI@2
-      displayName: publish
-      inputs:
-        command: publish
-        arguments: -c $(configuration) -o app/publish -f $(targetFramework)
-        zipAfterPublish: false
