@@ -5,7 +5,7 @@ namespace GK.Api.Core
     /// <summary>
     /// Represents general information about the results of an operation.
     /// </summary>
-    public class ApiMessage
+    public class ApiMessage : IApiMessage
     {
         public string Message { get; set; }
 

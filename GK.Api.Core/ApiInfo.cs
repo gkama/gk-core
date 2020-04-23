@@ -9,7 +9,7 @@ namespace GK.Api.Core
     /// <summary>
     /// Contains general information about an API.
     /// </summary>
-    public class ApiInfo
+    public class ApiInfo : IApiInfo
     {
         /// <summary>
         /// A human-readable name for the API.
