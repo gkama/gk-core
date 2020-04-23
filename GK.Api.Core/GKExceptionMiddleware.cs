@@ -36,7 +36,7 @@ namespace GK.Api.Core
         {
             try
             {
-                await _next.Invoke(httpContext);
+                await _next(httpContext);
             }
             catch (Exception e)
             {
