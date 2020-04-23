@@ -17,6 +17,10 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GK.Core\GK.Core.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <!-- where should the nuget package be created at -->
     <PackageOutputPath>./nupkg</PackageOutputPath>

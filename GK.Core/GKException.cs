@@ -4,7 +4,7 @@ using System.Text;
 using System.Net;
 using System.Text.Json;
 
-namespace GK.Api.Core
+namespace GK.Core
 {
     public class GKException : ApplicationException
     {

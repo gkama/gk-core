@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 
+using GK.Core;
+
 namespace GK.Api.Core
 {
     /// <summary>
