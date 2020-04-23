@@ -17,45 +17,45 @@ namespace GK.Core
         protected GKException()
         { }
 
-        protected GKException(int StatusCode)
+        protected GKException(int statusCode)
         {
-            this.StatusCode = StatusCode;
+            StatusCode = statusCode;
         }
 
-        protected GKException(string Message)
-            : base(Message)
+        protected GKException(string message)
+            : base(message)
         {
-            this.StatusCode = (int)HttpStatusCode.InternalServerError;
+            StatusCode = (int)HttpStatusCode.InternalServerError;
         }
 
         protected GKException(string message, Exception inner)
             : base(message, inner)
         { }
 
-        protected GKException(int StatusCode, string Message)
-            : base(Message)
+        protected GKException(int statusCode, string message)
+            : base(message)
         {
-            this.StatusCode = StatusCode;
+            StatusCode = statusCode;
         }
 
-        protected GKException(HttpStatusCode StatusCode, string Message)
-            : base(Message)
+        protected GKException(HttpStatusCode statusCode, string message)
+            : base(message)
         {
-            this.StatusCode = (int)StatusCode;
+            StatusCode = (int)statusCode;
         }
 
-        protected GKException(int StatusCode, Exception Inner)
-            : this(StatusCode, Inner.ToString())
+        protected GKException(int statusCode, Exception inner)
+            : this(statusCode, inner.ToString())
         { }
 
-        protected GKException(HttpStatusCode StatusCode, Exception Inner)
-            : this(StatusCode, Inner.ToString())
+        protected GKException(HttpStatusCode statusCode, Exception inner)
+            : this(statusCode, inner.ToString())
         { }
 
-        protected GKException(int StatusCode, JsonElement ErrorObject)
-            : this(StatusCode, ErrorObject.ToString())
+        protected GKException(int statusCode, JsonElement errorObject)
+            : this(statusCode, errorObject.ToString())
         {
-            this.ContentType = @"application/problem+json";
+            ContentType = @"application/problem+json";
         }
     }
 }
