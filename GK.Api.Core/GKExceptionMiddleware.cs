@@ -14,6 +14,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace GK.Api.Core
 {
+    /// <summary>
+    /// This middleware is responsible for catching exceptions, then handling them in a consistent manner.
+    /// </summary>
     public class GKExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -33,7 +36,7 @@ namespace GK.Api.Core
         {
             try
             {
-                await _next(httpContext);
+                await _next.Invoke(httpContext);
             }
             catch (Exception e)
             {
