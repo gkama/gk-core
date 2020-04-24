@@ -9,11 +9,19 @@ namespace GK.Core.Tests
     public class CoreTests
     {
         [Fact]
-        public void Test1()
+        public void ContactWithAllNamePartsHasExpectedFullName()
         {
-            var str = "test";
+            var contact = Helper.GetTestContact();
 
-            Assert.NotNull(str);
+            Assert.Equal("Mr. First M. Last III", contact.FullName);
+        }
+
+        [Fact]
+        public void NullContactHasEmptyFullName()
+        {
+            IContact contact = null;
+
+            Assert.Equal(string.Empty, contact.GetFullName());
         }
     }
 }
