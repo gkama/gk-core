@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,34 @@ namespace GK.Api.Core
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _env = env ?? throw new ArgumentNullException(nameof(env));
             _logger = loggerFactory?.CreateLogger("Startup");
+        }
+
+        public virtual void ConfigureServices(IServiceCollection services)
+        {
+            AddGKServices(services);
+        }
+
+        /// <summary>
+        /// Adds common services used by APIs.
+        /// </summary>
+        private void AddGKServices(IServiceCollection services)
+        {
+            services.AddSingleton(x =>
+            {
+                return new ApiInfo()
+                    .SetDefaults(BuildInfo.FromType(this.GetType()));
+            });
+
+            services.AddHealthChecks();
+            services.AddLogging();
+
+            services.AddControllers();
+            services.AddMvcCore()
+                .AddJsonOptions(o =>
+                {
+                    o.JsonSerializerOptions.WriteIndented = true;
+                    o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                });
         }
     }
 }
