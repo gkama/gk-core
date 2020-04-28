@@ -90,7 +90,7 @@ namespace GK.Api.Core
         }
     }
 
-    public static class HttpStatusCodeExceptionMiddlewareExtensions
+    public static partial class HttpStatusCodeExceptionMiddlewareExtensions
     {
         public static IApplicationBuilder UseGKExceptionMiddleware(this IApplicationBuilder builder)
         {
