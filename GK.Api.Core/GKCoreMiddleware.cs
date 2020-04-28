@@ -23,41 +23,41 @@ namespace GK.Api.Core
             _next = next ?? throw new ArgumentNullException(nameof(next));
         }
 
-        public async Task InvokeAsync(HttpContext http)
+        public async Task InvokeAsync(HttpContext httpContext)
         {
-            if (!http.Response.HasStarted
-                && !string.IsNullOrEmpty(http.TraceIdentifier))
-                http.Response.Headers[CoreConstants.RequestIdHttpHeader] = http.TraceIdentifier;
+            if (!httpContext.Response.HasStarted
+                && !string.IsNullOrEmpty(httpContext.TraceIdentifier))
+                httpContext.Response.Headers[CoreConstants.RequestIdHttpHeader] = httpContext.TraceIdentifier;
 
-            if (http.Request.Path.StartsWithSegments(AboutPath, out var remaining))
-                await WriteAboutInfoAsync(http, remaining);
+            if (httpContext.Request.Path.StartsWithSegments(AboutPath, out var remaining))
+                await WriteAboutInfoAsync(httpContext, remaining);
             else
-                await _next(http);
+                await _next(httpContext);
 
         }
 
-        private async Task WriteAboutInfoAsync(HttpContext http, PathString remaining)
+        private async Task WriteAboutInfoAsync(HttpContext httpContext, PathString remaining)
         {
             if (remaining.HasValue)
             {
                 if (remaining.Value == "/")
                 {
-                    http.Response.Redirect(AboutPath, true);
+                    httpContext.Response.Redirect(AboutPath, true);
                 }
                 else
                 {
-                    http.Response.StatusCode = StatusCodes.Status404NotFound;
+                    httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
 
-                    await http.Response.WriteAsync("Not Found");
+                    await httpContext.Response.WriteAsync("Not Found");
                 }
 
                 return;
             }
 
-            var about = http.RequestServices.GetRequiredService<AboutInfo>();
-            var json = JsonSerializer.Serialize(about, http.RequestServices.GetRequiredService<JsonSerializerOptions>());
+            var about = httpContext.RequestServices.GetRequiredService<AboutInfo>();
+            var json = JsonSerializer.Serialize(about, httpContext.RequestServices.GetRequiredService<JsonSerializerOptions>());
 
-            await http.Response.WriteAsync(json);
+            await httpContext.Response.WriteAsync(json);
         }
     }
 }
