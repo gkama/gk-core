@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -58,6 +58,14 @@ namespace GK.Api.Core
             var json = JsonSerializer.Serialize(about, httpContext.RequestServices.GetRequiredService<JsonSerializerOptions>());
 
             await httpContext.Response.WriteAsync(json);
+        }
+    }
+
+    public static partial class HttpStatusCodeExceptionMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseGKCoreMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<GKCoreMiddleware>();
         }
     }
 }
