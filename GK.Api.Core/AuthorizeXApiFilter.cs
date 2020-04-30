@@ -42,8 +42,12 @@ namespace GK.Api.Core
 
             string xApiKey = context.HttpContext.Request.Headers["x-api-key"];
 
-            if (xApiKey == _configuration[ConfigSections.XApiKey])
-                return;
+            if (xApiKey != null)
+            {
+                if (xApiKey == _configuration["XApiKey"]
+                    || xApiKey == _configuration.GetSection(ConfigSections.Configuration)["XApiKey"])
+                    return;
+            }
 
             context.HttpContext.Response.Headers["WWW-Authenticate"] = "x-api-key";
             context.Result = new UnauthorizedResult();
