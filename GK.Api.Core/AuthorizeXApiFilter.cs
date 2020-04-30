@@ -37,20 +37,13 @@ namespace GK.Api.Core
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (_env.IsDevelopment())
+            //if (_env.IsDevelopment())
+            //    return;
+
+            string xApiKey = context.HttpContext.Request.Headers["x-api-key"];
+
+            if (xApiKey == _configuration["XApiKey"])
                 return;
-
-            string authHeader = context.HttpContext.Request.Headers["x-api-key"];
-
-            if (authHeader != null
-                && authHeader.StartsWith("x-api-key"))
-            {
-                var encodedwriteKey = authHeader.Substring("x-api-key ".Length).Trim();
-                var writeKey = Encoding.UTF8.GetString(Convert.FromBase64String(encodedwriteKey)).TrimEnd(':');
-
-                if (writeKey == _configuration["XApiKey"])
-                    return;
-            }
 
             context.HttpContext.Response.Headers["WWW-Authenticate"] = "x-api-key";
             context.Result = new UnauthorizedResult();
