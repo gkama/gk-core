@@ -9,6 +9,8 @@ namespace GK.Api.Core
     /// </summary>
     public static class ConfigSections
     {
+        public const string XApiKey = nameof(XApiKey);
+
         public const string ConnectionStrings = nameof(ConnectionStrings);
         public const string SQLServer = nameof(SQLServer);
         public const string MySQL = nameof(MySQL);
