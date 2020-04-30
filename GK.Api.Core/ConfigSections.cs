@@ -11,8 +11,6 @@ namespace GK.Api.Core
     {
         public const string Configuration = nameof(Configuration);
 
-        public const string XApiKey = nameof(XApiKey);
-
         public const string ConnectionStrings = nameof(ConnectionStrings);
         public const string SQLServer = nameof(SQLServer);
         public const string MySQL = nameof(MySQL);
