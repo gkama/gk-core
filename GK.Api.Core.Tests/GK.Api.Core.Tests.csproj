@@ -4,5 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GK.Api.Core\GK.Api.Core.csproj" />
+  </ItemGroup>
+
 
 </Project>
