@@ -37,12 +37,12 @@ namespace GK.Api.Core
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            //if (_env.IsDevelopment())
-            //    return;
+            if (_env.IsDevelopment())
+                return;
 
             string xApiKey = context.HttpContext.Request.Headers["x-api-key"];
 
-            if (xApiKey == _configuration["XApiKey"])
+            if (xApiKey == _configuration[ConfigSections.XApiKey])
                 return;
 
             context.HttpContext.Response.Headers["WWW-Authenticate"] = "x-api-key";
