@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace GK.Core
@@ -15,6 +16,10 @@ namespace GK.Core
 
         public GKFriendlyException(string message)
             : base(message)
+        { }
+
+        public GKFriendlyException(HttpStatusCode statusCode, string message)
+            : base(statusCode, message)
         { }
 
         public GKFriendlyException(string message, Exception inner)
